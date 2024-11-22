@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 interface MenuItem {
   id: number;
@@ -14,9 +14,13 @@ interface MenuContextType {
   removeMenuItem: (id: number) => void;
 }
 
+interface MenuProviderProps {
+  children: ReactNode; // Explicitly define children type
+}
+
 const MenuContext = createContext<MenuContextType | undefined>(undefined);
 
-export const MenuProvider: React.FC = ({ children }) => {
+export const MenuProvider: React.FC<MenuProviderProps> = ({ children }) => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
   const addMenuItem = (item: MenuItem) => {
